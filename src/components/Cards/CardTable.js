@@ -41,6 +41,19 @@ export default function CardTable({ color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
+                  <input
+                    type="checkbox"
+                    className="cursor-pointer form-checkbox border-2 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                  />
+                </th>
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
                   Project
                 </th>
                 <th
@@ -95,6 +108,12 @@ export default function CardTable({ color }) {
             </thead>
             <tbody>
               <tr>
+                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <input
+                    type="checkbox"
+                    className="cursor-pointer form-checkbox border-2 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                  />
+                </th>
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                   <img
                     src="/img/bootstrap.jpg"
@@ -158,6 +177,13 @@ export default function CardTable({ color }) {
                 </td>
               </tr>
               <tr>
+                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <input
+                    type="checkbox"
+                    className="cursor-pointer form-checkbox border-2 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                  />
+                </th>
+ 
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                   <img
                     src="/img/angular.jpg"
@@ -222,6 +248,13 @@ export default function CardTable({ color }) {
                 </td>
               </tr>
               <tr>
+                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <input
+                    type="checkbox"
+                    className="cursor-pointer form-checkbox border-2 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                  />
+                </th>
+ 
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                   <img
                     src="/img/sketch.jpg"
@@ -285,6 +318,13 @@ export default function CardTable({ color }) {
                 </td>
               </tr>
               <tr>
+                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <input
+                    type="checkbox"
+                    className="cursor-pointer form-checkbox border-2 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                  />
+                </th>
+ 
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                   <img
                     src="/img/react.jpg"
@@ -349,6 +389,13 @@ export default function CardTable({ color }) {
                 </td>
               </tr>
               <tr>
+                <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                  <input
+                    type="checkbox"
+                    className="cursor-pointer form-checkbox border-2 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                  />
+                </th>
+ 
                 <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
                   <img
                     src="/img/vue.jpg"
