@@ -2,14 +2,14 @@ import React from "react";
 
 // layout for page
 import Admin from "layouts/Admin";
-import CardSettings from "components/Cards/CardSettings";
+import CardUserDetail from "components/Cards/CardUserDetail";
 
 export default function LineFriendDetail() {
   return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full lg:w-8/12 px-4">
-          <CardSettings />
+          <CardUserDetail />
         </div>
       </div>
     </>

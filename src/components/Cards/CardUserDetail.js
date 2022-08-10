@@ -1,42 +1,25 @@
+import Link from "next/link";
 import React from "react";
-import { createPopper } from "@popperjs/core";
 
+// components
 
-const CardSettings = () => {
-  const [popoverShow, setPopoverShow] = React.useState(false);
-  const [popoverText, setPopoverText] = React.useState('クリックでurlをコピーできます');
-  const [popoverIconShow, setPopoverIconShow] = React.useState(false);
-  const btnRef = React.createRef();
-  const popoverRef = React.createRef();
-  const openTooltip = () => {
-    createPopper(btnRef.current, popoverRef.current, {
-      placement: "top"
-    });
-    setPopoverShow(true);
-  };
-  const closeTooltip = () => {
-    setPopoverShow(false);
-    setPopoverText('クリックでurlをコピーできます');
-    setPopoverIconShow(false);
-  };
-  const doCopy = () => {
-    const inviteUrl = document.getElementById('invite-url').value;
-    navigator.clipboard.writeText(inviteUrl);
-    setPopoverText('コピーしました');
-    setPopoverIconShow(true);
-    setTimeout(() => {
-      closeTooltip();
-    }, 1000);
-  }
+export default function CardUserDetail() {
   return (
     <>
+      <div className="mt-2 w-full">
+        <Link href="/admin/tables">
+          <a 
+            href="#pablo"
+          >
+            <i className="fas fa-chevron-left"></i>{" "}
+            一覧へ戻る
+          </a>
+        </Link>
+      </div>
       <div className="relative flex flex-col min-w-0 break-words w-full my-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
-            <h6 className="text-blueGray-700 text-xl font-bold">
-            <i className="fas fa-cog"></i>
-              {" "}設定
-            </h6>
+            <h6 className="text-blueGray-700 text-xl font-bold">友だち詳細</h6>
             <button
               className="bg-blueGray-700 active:bg-blueGray-600 text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
               type="button"
@@ -61,7 +44,7 @@ const CardSettings = () => {
                   </label>
                   <input
                     type="text"
-                    disabled
+                    readOnly
                     className="border-0 px-3 py-3 text-blueGray-600 bg-blueGray-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     defaultValue="lucky.jesse"
                   />
@@ -121,37 +104,18 @@ const CardSettings = () => {
             </h6>
             <div className="flex flex-wrap">
               <div className="w-full lg:w-12/12 px-4">
-                <div className="relative flex w-full flex-wrap items-stretch mb-3">
-                  <input 
-                    type="text" 
-                    id="invite-url"
-                    disabled
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 relative bg-blueGray-200 rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue="http://localhost:3000/admin/settings"
+                <div className="relative w-full mb-3">
+                  <label
+                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Address
+                  </label>
+                  <input
+                    type="text"
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                   />
-                  <span 
-                    className="cursor-pointer z-10 h-full leading-snug font-normal absolute text-center text-blueGray-400 bg-transparent rounded text-base items-center justify-center w-10 right-0 pr-3 py-3 "
-                    onMouseEnter={openTooltip}
-                    onMouseLeave={closeTooltip}
-                    onClick={doCopy}
-                    ref={btnRef}
-                  >
-                    <i className="fas fa-clone"></i>
-                  </span>
-                  <div
-                    className={
-                      (popoverShow ? "" : "hidden ") +
-                      "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"
-                    }
-                    ref={popoverRef}
-                  >
-                    <p
-                      className="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-                    >
-                      <i className={(popoverIconShow ? "" : "hidden ") + "fas fa-check"}></i>
-                      {" "}{popoverText}
-                    </p>
-                  </div>
                 </div>
               </div>
               <div className="w-full lg:w-4/12 px-4">
@@ -231,5 +195,3 @@ const CardSettings = () => {
     </>
   );
 }
-
-export default CardSettings;
