@@ -1,10 +1,41 @@
 import React from "react";
 
 // layout for page
-
 import Auth from "layouts/Auth.js";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 export default function Register() {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetch('/api/regist', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password
+      })
+    })
+      .then(res => res.json())
+      .then((data) => {
+        if (data.statusCode === 200) {
+          router.push('/admin/dashboard');
+        } else {
+          throw new Error('StatusCode: ' + data.statusCode);
+        }
+      }).catch((error) => {
+        alert('エラーが発生しました\n' + error);
+        console.log(error);
+      })
+
+  }
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -19,7 +50,7 @@ export default function Register() {
                 </div>
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -29,8 +60,12 @@ export default function Register() {
                     </label>
                     <input
                       type="text"
+                      name="name"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Name"
+                      onChange={(e) => {setName(e.target.value)}}
+                      value={name}
+                      required
                     />
                   </div>
 
@@ -43,8 +78,12 @@ export default function Register() {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
+                      onChange={(e) => {setEmail(e.target.value)}}
+                      value={email}
+                      required
                     />
                   </div>
 
@@ -57,17 +96,22 @@ export default function Register() {
                     </label>
                     <input
                       type="password"
+                      name="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
+                      onChange={(e) => {setPassword(e.target.value)}}
+                      value={password}
+                      required
                     />
                   </div>
 
                   <div>
                     <label className="inline-flex items-center cursor-pointer">
                       <input
-                        id="customCheckLogin"
                         type="checkbox"
+                        name="policy"
                         className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
+                        required
                       />
                       <span className="ml-2 text-sm font-semibold text-blueGray-600">
                         <a
@@ -85,7 +129,7 @@ export default function Register() {
                   <div className="text-center mt-6 w-full justify-center">
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-1/2 ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
                     >
                       新規登録
                     </button>
@@ -99,5 +143,4 @@ export default function Register() {
     </>
   );
 }
-
 Register.layout = Auth;
