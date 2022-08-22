@@ -1,11 +1,40 @@
 import React from "react";
+import { useState } from "react";
+import { useRouter} from "next/router";
 import Link from "next/link";
-
-// layout for page
+import axios from "axios";
 
 import Auth from "layouts/Auth.js";
+import { ApiInfo } from "utils/config";
+
 
 export default function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const params = {email: email, password: password};
+    // CSRF保護を初期化
+    axios.get(`${ApiInfo.baseUrl}/sanctum/csrf-cookie`, {withCredentials: true})
+    .then((result) => {
+      // ログイン処理
+      axios.post(`${ApiInfo.baseUrl}${ApiInfo.version}/login`, params, {withCredentials: true})
+      .then((response) => {
+        // ログイン後処理
+        if (response.data.status !== 200) {
+          throw new Error();
+        }
+        router.push('/admin/dashboard');
+      }).catch((err) => {
+        alert('ログインに失敗しました\n' + err);
+        console.error(err);
+      });
+    });
+  }
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -20,7 +49,7 @@ export default function Login() {
                 </div>
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -30,8 +59,12 @@ export default function Login() {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Email"
+                      onChange={(e) => {setEmail(e.target.value)}}
+                      value={email}
+                      required
                     />
                   </div>
 
@@ -46,6 +79,9 @@ export default function Login() {
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
+                      onChange={(e) => {setPassword(e.target.value)}}
+                      value={password}
+                      required
                     />
                   </div>
                   <div>
@@ -64,7 +100,7 @@ export default function Login() {
                   <div className="text-center mt-6">
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
                     >
                       ログイン
                     </button>

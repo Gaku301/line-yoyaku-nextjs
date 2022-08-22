@@ -1,9 +1,11 @@
 import React from "react";
-
-// layout for page
-import Auth from "layouts/Auth.js";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import axios from "axios";
+
+import Auth from "layouts/Auth.js";
+import { ApiInfo } from "utils/config";
+
 
 export default function Register() {
   const [name, setName] = useState('');
@@ -13,27 +15,27 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('/api/regist', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password
-      })
-    })
-      .then(res => res.json())
-      .then((data) => {
-        if (data.statusCode === 200) {
-          router.push('/admin/dashboard');
-        } else {
-          throw new Error('StatusCode: ' + data.statusCode);
-        }
-      }).catch((error) => {
-        alert('エラーが発生しました\n' + error);
-        console.log(error);
-      })
 
+    const params = {
+      name: name,
+      email: email,
+      password: password
+    }
+    // CSRF保護を初期化
+    axios.get(`${ApiInfo.baseUrl}/sanctum/csrf-cookie`, {withCredentials: true})
+    .then((result) => {
+      // Sign Up処理
+      axios.post(`${ApiInfo.baseUrl}${ApiInfo.version}/regist`, params, {withCredentials: true})
+      .then((response) => {
+        if (response.data.status !== 200) {
+          throw new Error();
+        }
+        router.push('/admin/dashboard');
+      }).catch((err) => {
+        alert('新規登録に失敗しました\n' + err);
+        console.error(err);
+      });
+    });
   }
 
   return (
