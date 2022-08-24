@@ -15,7 +15,6 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     const params = {email: email, password: password};
     // CSRF保護を初期化
     axios.get(`${ApiInfo.baseUrl}/sanctum/csrf-cookie`, {withCredentials: true})

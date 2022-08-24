@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 
 // components
 
@@ -471,6 +471,6 @@ CardTable.defaultProps = {
   color: "light",
 };
 
-CardTable.propTypes = {
-  color: PropTypes.oneOf(["light", "dark"]),
-};
+// CardTable.propTypes = {
+//   color: PropTypes.oneOf(["light", "dark"]),
+// };

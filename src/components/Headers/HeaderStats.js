@@ -2,7 +2,7 @@ import React from "react";
 
 // components
 
-import CardStats from "components/Cards/CardStats.js";
+// import CardStats from "components/Cards/CardStats.js";
 
 export default function HeaderStats() {
   return (
@@ -14,7 +14,7 @@ export default function HeaderStats() {
             {/* Card stats */}
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
-                <CardStats
+                {/* <CardStats
                   statSubtitle="PERFORMANCE"
                   statTitle="49,65%"
                   statArrow="up"
@@ -23,7 +23,7 @@ export default function HeaderStats() {
                   statDescripiron="Since last month"
                   statIconName="fas fa-percent"
                   statIconColor="bg-lightBlue-500"
-                />
+                /> */}
               </div>
             </div>
           </div>
