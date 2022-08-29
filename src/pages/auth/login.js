@@ -18,20 +18,20 @@ export default function Login() {
     const params = {email: email, password: password};
     // CSRF保護を初期化
     axios.get(`${ApiInfo.baseUrl}/sanctum/csrf-cookie`, {withCredentials: true})
-    .then((result) => {
-      // ログイン処理
-      axios.post(`${ApiInfo.baseUrl}${ApiInfo.version}/login`, params, {withCredentials: true})
-      .then((response) => {
-        // ログイン後処理
-        if (response.data.status !== 200) {
-          throw new Error();
-        }
-        router.push('/admin/dashboard');
-      }).catch((err) => {
-        alert('ログインに失敗しました\n' + err);
-        console.error(err);
+      .then((result) => {
+        // ログイン処理
+        axios.post(`${ApiInfo.baseUrl}${ApiInfo.version}/login`, params, {withCredentials: true})
+        .then((response) => {
+          // ログイン後処理
+          if (response.data.status !== 200) {
+            throw new Error();
+          }
+          router.push('/admin/dashboard');
+        }).catch((err) => {
+          alert('ログインに失敗しました\n' + err);
+          console.error(err);
+        });
       });
-    });
   }
 
   return (
