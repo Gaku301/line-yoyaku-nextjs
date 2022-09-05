@@ -12,6 +12,10 @@ export default function handler(req, res) {
         maxAge: -1,
         path: '/'
       }),
+      serialize('user', "", {
+        maxAge: -1,
+        path: '/'
+      }),
     ]);
     res.status(200).send('ok');
   } catch (e) {

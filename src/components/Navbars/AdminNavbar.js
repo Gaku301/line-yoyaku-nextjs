@@ -19,7 +19,7 @@ export default function Navbar() {
         axios.get('/api/logout')
           .then(response => console.log(response))
           .catch(error => console.log(error))
-        router.push('/auth/login');
+        router.push('/admin/login');
       }).catch((err) => {
         alert('ログアウトに失敗しました\n' + err);
         console.error(err);
@@ -43,6 +43,7 @@ export default function Navbar() {
               <li className="nav-item">
                 <a 
                   className="px-3 py-2 flex items-center text-xs uppercase font-bold leading-snug text-white hover:opacity-75"
+                  href="#pablo"
                   onClick={handleLogout}
                 >
                   ログアウト

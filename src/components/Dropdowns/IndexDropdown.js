@@ -91,7 +91,7 @@ const IndexDropdown = () => {
         >
           Auth Layout
         </span>
-        <Link href="/auth/login">
+        <Link href="/admin/login">
           <a
             href="#pablo"
             className={

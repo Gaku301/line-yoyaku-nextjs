@@ -1,30 +1,40 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
+// import { createRoot } from "react-dom/client";
 import App from "next/app";
 import Head from "next/head";
-import Router from "next/router";
+// import Router from "next/router";
+import { RecoilRoot } from "recoil";
 
-import PageChange from "components/PageChange/PageChange.js";
+// import PageChange from "components/PageChange/PageChange.js";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "styles/tailwind.css";
 
+/*
+let root = {};
 Router.events.on("routeChangeStart", (url) => {
+  const container = document.getElementById("page-transition");
+  if (root) {
+    root = createRoot(container);
+  }
   console.log(`Loading: ${url}`);
   document.body.classList.add("body-page-transition");
-  ReactDOM.render(
-    <PageChange path={url} />,
-    document.getElementById("page-transition")
-  );
+  root.render(<PageChange path={url} />);
 });
 Router.events.on("routeChangeComplete", () => {
-  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
+  // const root = createRoot(document.getElementById("page-transition"));
+  // ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
+  root.unmount();
   document.body.classList.remove("body-page-transition");
 });
 Router.events.on("routeChangeError", () => {
-  ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
+  // const root = createRoot(document.getElementById("page-transition"));
+  root.unmount();
+  // ReactDOM.unmountComponentAtNode(document.getElementById("page-transition"));
   document.body.classList.remove("body-page-transition");
 });
+*/
 
 export default class MyApp extends App {
   componentDidMount() {
@@ -61,7 +71,8 @@ export default class MyApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
-    const Layout = Component.layout || (({ children }) => <>{children}</>);
+    // MEMO: Layoutがauthやadminで違うとrecoilがリセットされてしまう
+    // const Layout = Component.layout || (({ children }) => <>{children}</>);
 
     return (
       <React.Fragment>
@@ -70,12 +81,14 @@ export default class MyApp extends App {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <title>Notus NextJS by Creative Tim</title>
+          <title>LINE-Yoyaku</title>
           <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
         </Head>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        {/* <Layout> */}
+          <RecoilRoot>
+            <Component {...pageProps} />
+          </RecoilRoot>
+        {/* </Layout> */}
       </React.Fragment>
     );
   }

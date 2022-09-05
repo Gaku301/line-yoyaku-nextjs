@@ -1,11 +1,10 @@
 import React from "react";
-// import PropTypes from "prop-types";
 
-// components
+import TableDropdown from "components/Dropdowns/TableDropdown";
 
-import TableDropdown from "components/Dropdowns/TableDropdown.js";
 
 export default function CardTable({ color }) {
+
   return (
     <>
       <div
