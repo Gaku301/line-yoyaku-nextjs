@@ -1,9 +1,12 @@
 import React from "react";
+import axios from "axios";
 
 import TableDropdown from "components/Dropdowns/TableDropdown";
+import { ApiInfo } from "utils/config";
 
 
 export default function CardTable({ color }) {
+  // axios.get()
 
   return (
     <>

@@ -4,7 +4,6 @@ import Link from "next/link";
 import axios from "axios";
 import { useSetRecoilState } from "recoil";
 
-import Navbar from "components/Navbars/AdminNavbar";
 import { userState } from "components/State/Provider";
 import FooterSmall from "components/Footers/FooterSmall";
 import { ApiInfo } from "utils/config";
@@ -46,7 +45,6 @@ export default function Login() {
 
   return (
     <>
-      <Navbar transparent />
       <main>
         <section className="relative w-full h-full py-40 min-h-screen">
           <div className="absolute top-0 w-full h-full bg-blueGray-800 bg-no-repeat bg-full"></div>

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { createPopper } from "@popperjs/core";
 import Cookies from "cookie";
 import { useRecoilValue } from "recoil";
@@ -14,7 +14,7 @@ export default function CardSettings() {
   const [popoverText, setPopoverText] = useState('クリックでurlをコピーできます');
   const [popoverIconShow, setPopoverIconShow] = useState(false);
   const [access_token, setAccessToken] = useState('');
-  const [secrete, setSecret] = useState('');
+  const [secret, setSecret] = useState('');
   const btnRef = React.createRef();
   const popoverRef = React.createRef();
 
@@ -48,7 +48,7 @@ export default function CardSettings() {
     const params = {
       user_id: user.id,
       channel_access_token: access_token,
-      channel_secret: secrete
+      channel_secret: secret
     }
     axios.post(`${ApiInfo.baseUrl}${ApiInfo.version}/user/settings`, params, {withCredentials: true})
       .then((response) => {
@@ -59,7 +59,7 @@ export default function CardSettings() {
       }).catch((err) => {
         alert('保存に失敗しました');
         console.error(err);
-      })
+      });
   }
 
   return (
@@ -151,7 +151,7 @@ export default function CardSettings() {
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     onChange={(e) => {setSecret(e.target.value)}}
-                    value={secrete}
+                    value={secret}
                   />
                 </div>
               </div>

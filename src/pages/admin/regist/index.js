@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 
-import Navbar from "components/Navbars/AdminNavbar";
 import FooterSmall from "components/Footers/FooterSmall";
 import { ApiInfo } from "utils/config";
 
@@ -16,34 +15,34 @@ export default function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    router.push('/admin/regist/step-1');
 
-    const params = {
-      name: name,
-      email: email,
-      password: password
-    }
-    // CSRF保護を初期化
-    axios.get(`${ApiInfo.baseUrl}/sanctum/csrf-cookie`, {withCredentials: true})
-    .then((result) => {
-      // Sign Up処理
-      axios.post(`${ApiInfo.baseUrl}${ApiInfo.version}/regist`, params, {withCredentials: true})
-      .then((response) => {
-        if (response.data.status !== 200) {
-          throw new Error();
-        }
-        setTimeout(() => {
-          router.push('/admin/tables');
-        }, 1000);
-      }).catch((err) => {
-        alert('新規登録に失敗しました\n' + err);
-        console.error(err);
-      });
-    });
+    // const params = {
+    //   name: name,
+    //   email: email,
+    //   password: password
+    // }
+    // // CSRF保護を初期化
+    // axios.get(`${ApiInfo.baseUrl}/sanctum/csrf-cookie`, {withCredentials: true})
+    // .then((result) => {
+    //   // Sign Up処理
+    //   axios.post(`${ApiInfo.baseUrl}${ApiInfo.version}/regist`, params, {withCredentials: true})
+    //   .then((response) => {
+    //     if (response.data.status !== 200) {
+    //       throw new Error();
+    //     }
+    //     setTimeout(() => {
+    //       router.push('/admin/regist/step-1');
+    //     }, 1000);
+    //   }).catch((err) => {
+    //     alert('新規登録に失敗しました\n' + err);
+    //     console.error(err);
+    //   });
+    // });
   }
 
   return (
     <>
-      <Navbar transparent />
       <main>
         <section className="relative w-full h-full py-40 min-h-screen">
           <div className="absolute top-0 w-full h-full bg-blueGray-800 bg-no-repeat bg-full"></div>
